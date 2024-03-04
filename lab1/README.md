@@ -34,7 +34,9 @@ Passo 7: Tudo funcionando de acordo, comando add e commit em tudo já feito
 ![image](https://github.com/macaaalm/sistemasOperacionais/assets/113950201/ff45d8bd-c68e-4d45-876c-f5e949555866)
 
 Passo 8: Logo em seguida, push para o github
+
 ![image](https://github.com/macaaalm/sistemasOperacionais/assets/113950201/39e8b147-44f0-4cd2-9ce7-d816545fc1c2)
 
 Passo 9: lab1 com os respectivos arquivos criados
+
 ![image](https://github.com/macaaalm/sistemasOperacionais/assets/113950201/0d848a74-ec92-4c4b-8c27-3abc905ca24e)
