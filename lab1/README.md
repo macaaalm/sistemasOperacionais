@@ -1,4 +1,5 @@
-Atividade 1 - Introdução 
+Atividade 1 - Introdução
+
 
 Alunos:
 Eduardo Honorio Friaca - RA: 10408959
@@ -6,6 +7,7 @@ Eduardo Honorio Friaca - RA: 10408959
 Matheus Marcal Ramos de Oliveira - RA: 10409001
 
 Pedro Akira Cardoso Toma - RA: 10390171
+
 
 Passo 1: Conectar a máquina no servidor da AWS
 ![image](https://github.com/macaaalm/sistemasOperacionais/assets/113950201/313a0000-4b7f-4ef9-8ec9-d6cc0d7f2eaf)
