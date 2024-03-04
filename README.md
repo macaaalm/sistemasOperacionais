@@ -1,4 +1,4 @@
-# Sistemas Operacionais
+# Sistemas Operacionais - Turma 04G11
 
 Alunos:
 * Eduardo Honorio Friaca - RA: 10408959
