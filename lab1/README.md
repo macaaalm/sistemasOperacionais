@@ -2,7 +2,9 @@ Atividade 1 - Introdução
 
 Alunos:
 Eduardo Honorio Friaca - RA: 10408959
+
 Matheus Marcal Ramos de Oliveira - RA: 10409001
+
 Pedro Akira Cardoso Toma - RA: 10390171
 
 Passo 1: Conectar a máquina no servidor da AWS
@@ -15,6 +17,7 @@ Passo 3: Baixar gcc para compilar/rodar o código hello world que será criado
 ![image](https://github.com/macaaalm/sistemasOperacionais/assets/113950201/4dca6937-a103-4686-9a15-3f3e8b6f06ec)
 
 Passo 4: Colocar o diretório correto para alterar lab1
+
 ![image](https://github.com/macaaalm/sistemasOperacionais/assets/113950201/7d0b1670-9561-435c-96db-96507d6ad7ea)
 
 Passo 5: Criar helloworld.c com comando touch e usar comando vi para editá-lo
