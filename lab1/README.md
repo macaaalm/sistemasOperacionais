@@ -19,7 +19,7 @@ Passo 4: Colocar o diretório correto para alterar lab1
 
 ![image](https://github.com/macaaalm/sistemasOperacionais/assets/113950201/7d0b1670-9561-435c-96db-96507d6ad7ea)
 
-Passo 5: Criar helloworld.c com comando touch e usar comando vi para editá-lo
+Passo 5: Criar helloworld.c com comando touch e usar editor de texto vi para escrever o código hello world em si
 ![image](https://github.com/macaaalm/sistemasOperacionais/assets/113950201/087c946d-7905-4770-aa15-6c0213237e2e)
 
 (dentro do comando vi, escrever o código de hello world, e utilizar :wq para salvar alterações)
