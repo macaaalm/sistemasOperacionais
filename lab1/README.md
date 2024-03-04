@@ -22,7 +22,9 @@ Passo 4: Colocar o diretório correto para alterar lab1
 
 Passo 5: Criar helloworld.c com comando touch e usar comando vi para editá-lo
 ![image](https://github.com/macaaalm/sistemasOperacionais/assets/113950201/087c946d-7905-4770-aa15-6c0213237e2e)
+
 (dentro do comando vi, escrever o código de hello world, e utilizar :wq para salvar alterações)
+
 ![image](https://github.com/macaaalm/sistemasOperacionais/assets/113950201/236c1698-e839-4efc-bf19-c013806067ea)
 
 Passo 6: Com arquivo.c criado, utilizando o comando gcc -o para compilar arquivo, nomeado de "olaCompilado", e usando ./ para rodá-lo
