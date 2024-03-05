@@ -7,12 +7,15 @@ Alunos:
 
 
 Passo 1: Conectar a máquina no servidor da AWS
+
 ![image](https://github.com/macaaalm/sistemasOperacionais/assets/113950201/313a0000-4b7f-4ef9-8ec9-d6cc0d7f2eaf)
 
 Passo 2: Copiar a chave, adicionar no github e baixar o git para comunicação do aws com o github
+
 ![image](https://github.com/macaaalm/sistemasOperacionais/assets/113950201/db5e4dd5-e08a-4fe0-a49a-23408ab8d73f)
 
 Passo 3: Baixar gcc para compilar/rodar o código hello world que será criado
+
 ![image](https://github.com/macaaalm/sistemasOperacionais/assets/113950201/4dca6937-a103-4686-9a15-3f3e8b6f06ec)
 
 Passo 4: Usar o comando git clone para copiar repositório e colocar o diretório correto para alterar lab1
