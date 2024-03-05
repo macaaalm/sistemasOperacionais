@@ -23,6 +23,7 @@ Passo 4: Usar o comando git clone para copiar repositório e colocar o diretóri
 ![image](https://github.com/macaaalm/sistemasOperacionais/assets/113950201/7d0b1670-9561-435c-96db-96507d6ad7ea)
 
 Passo 5: Criar helloworld.c com comando touch e usar editor de texto vi para escrever o código hello world em si
+
 ![image](https://github.com/macaaalm/sistemasOperacionais/assets/113950201/087c946d-7905-4770-aa15-6c0213237e2e)
 
 (dentro do comando vi, escrever o código de hello world, e utilizar :wq para salvar alterações)
@@ -30,9 +31,11 @@ Passo 5: Criar helloworld.c com comando touch e usar editor de texto vi para esc
 ![image](https://github.com/macaaalm/sistemasOperacionais/assets/113950201/236c1698-e839-4efc-bf19-c013806067ea)
 
 Passo 6: Com arquivo.c criado, utilizando o comando gcc -o para compilar arquivo, nomeado de "olaCompilado", e usando ./ para rodá-lo
+
 ![image](https://github.com/macaaalm/sistemasOperacionais/assets/113950201/16d78b02-3557-450e-b9e1-03912707f342)
 
 Passo 7: Tudo funcionando de acordo, comando add e commit em tudo já feito
+
 ![image](https://github.com/macaaalm/sistemasOperacionais/assets/113950201/ff45d8bd-c68e-4d45-876c-f5e949555866)
 
 Passo 8: Logo em seguida, push para o github
