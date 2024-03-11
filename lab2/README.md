@@ -23,3 +23,5 @@ Seguindo a lógica a seguir:
 ![image](https://github.com/macaaalm/sistemasOperacionais/assets/113950201/fb4f96e0-77af-45f3-a236-fc98d7944916)
 
 Dessa forma, o total de processos será de 8, seguindo também o cálculo de 2^n, nesse caso 2^3 = 8.
+
+### EXERCÍCIO: Construa um exemplo, na linguagem C, onde os processos pai e filho trocam algum tipo de mensagem.
