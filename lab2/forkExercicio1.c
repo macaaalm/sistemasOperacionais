@@ -3,7 +3,7 @@
 #include <sys/types.h>
 #include <unistd.h>
 #include <sys/wait.h>
-#define BUFFER_SIZE 4  // buffer size for read(0 and write()
+#define BUFFER_SIZE 4  // buffer size for read() and write()
 
 int value = 5;
 
@@ -22,7 +22,8 @@ int main()
                 close(p[0]); // closing file descriptor for reading (child)
                 printf("Entrei no filho!\n");
                 value += 15;
-                write(p[1], &value, BUFFER_SIZE); // writing in pipe file descriptorclose(p[1]); // closing fd for writing (child)
+                write(p[1], &value, BUFFER_SIZE); // writing in pipe file descriptor 
+		close(p[1]); // closing fd for writing (child)
                 printf ("CHILD: value = %d\n",value); /* LINE A */
                 return 0;
         }
