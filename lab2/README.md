@@ -40,7 +40,7 @@ Dessa forma, adaptamos o código para que houvesse a comunicação entre process
 A sua leitura é feita pelo file descriptor na posição 0, e a sua escrita na posição 1. Utilizando 3 parâmetros, o primeiro da condição de escrita/leitura (1 ou 0), o segundo é o endereço do buffer que contém os dados escritos ou a serem escritos, e o terceiro parâmentro define o tamanho do buffer.
 Logo, o código abaixo foi desenvolvido dentro da AWS:
 
-![image](https://github.com/macaaalm/sistemasOperacionais/assets/113950201/6c0c3379-aa8d-4d77-a892-d93149e8d583)
+![image](https://github.com/macaaalm/sistemasOperacionais/assets/113950201/4a7be71f-809d-4c3c-8d88-6162da53b1e8)
 
 Tendo como resultado o mesmo valor de value para os dois processos:
 
