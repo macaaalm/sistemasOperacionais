@@ -14,3 +14,4 @@ No código acima o processo pai é o processo principal já sendo executado, por
 ![image](https://github.com/macaaalm/sistemasOperacionais/assets/113950201/c271cdb4-9c9a-43a4-904e-397dc34a4d20)
 
 ### Quantos processos serão criados?
+![image](https://github.com/macaaalm/sistemasOperacionais/assets/113950201/fb4f96e0-77af-45f3-a236-fc98d7944916)
