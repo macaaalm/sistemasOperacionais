@@ -10,4 +10,7 @@ A função fork, por duplicar um processo em pai e filho, retorna um Process ID 
 No código acima o processo pai é o processo principal já sendo executado, porém na linha 11 a função fork foi chamada e o processo foi duplicado e a paritr do PID podemos notar quando será executado pai e filho. Nesse caso, filho será executado na linha 16 à 19 e pai na linha 20 à 25.
 
 
-## Considere ainda o exemplo a seguir:
+### Considere ainda o exemplo a seguir:
+![image](https://github.com/macaaalm/sistemasOperacionais/assets/113950201/c271cdb4-9c9a-43a4-904e-397dc34a4d20)
+
+### Quantos processos serão criados?
