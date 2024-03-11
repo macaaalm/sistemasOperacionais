@@ -14,4 +14,10 @@ No código acima o processo pai é o processo principal já sendo executado, por
 ![image](https://github.com/macaaalm/sistemasOperacionais/assets/113950201/c271cdb4-9c9a-43a4-904e-397dc34a4d20)
 
 ### Quantos processos serão criados?
+
+A função fork(), tem o objetivo de duplicar os processos, logo em sua primeira chamada, o processo pai P0 cria o filho P1. 
+A partir da segunda chamada, o processo pai P0 cria mais um filho P2 e o processo filho P1 cria outro processo filho P3.
+Já na terceira chamada cada um dos processos criados anteriormente criam um processo filho cada, gerando P4, P5, P6 e P7.
+Seguindo a lógica a seguir:
 ![image](https://github.com/macaaalm/sistemasOperacionais/assets/113950201/fb4f96e0-77af-45f3-a236-fc98d7944916)
+Dessa forma, o total de processos será de 8, seguindo também o cálculo de 2^n, nesse caso 2^3 = 8.
