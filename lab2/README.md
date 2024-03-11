@@ -6,3 +6,5 @@
 ### Você é capaz de identificar os trechos executados por pai e filho?
 
 A função fork, por duplicar um processo em pai e filho, retorna um Process ID (PID) diferente para os dois processos. Portanto, é possível identificar quem é quem pelo PID, sendo o filho igual a 0 e o pai maior que 0, caso menor que 0 o fork deu algum erro.
+
+No código acima o processo pai é o processo principal já sendo executado, porém na linha 11 a função fork foi chamada e o processo foi duplicado e a paritr do PID podemos notar quando será executado pai e filho. Nesse caso, filho será executado na linha 16 à 19 e pai na linha 20 à 25.
