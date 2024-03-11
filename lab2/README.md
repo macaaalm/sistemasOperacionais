@@ -30,7 +30,7 @@ Seguindo a lógica a seguir:
 
 Dessa forma, o total de processos será de 8, seguindo também o cálculo de 2^n, nesse caso 2^3 = 8.
 
-### EXERCÍCIO: Construa um exemplo, na linguagem C, onde os processos pai e filho trocam algum tipo de mensagem.
+### -> EXERCÍCIO: Construa um exemplo, na linguagem C, onde os processos pai e filho trocam algum tipo de mensagem.
 
 Usando o fork-question-1.c disponibilizado pelo professor, rodamos na AWS e esse foi o resultado:
 
