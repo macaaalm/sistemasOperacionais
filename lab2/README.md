@@ -27,13 +27,16 @@ Dessa forma, o total de processos será de 8, seguindo também o cálculo de 2^n
 ### EXERCÍCIO: Construa um exemplo, na linguagem C, onde os processos pai e filho trocam algum tipo de mensagem.
 
 Usando o fork-question-1.c disponibilizado pelo professor, rodamos na AWS e esse foi o resultado:
+
 ![image](https://github.com/macaaalm/sistemasOperacionais/assets/113950201/a7d8b490-5efc-4f52-a64c-d027c2ab30d7)
 
 Dessa forma, adaptamos o código para que houvesse a comunicação entre processos de pai e filho. Ao pesquisarmos sobre IPC - Inter-Process Communication, o método de pipeline foi o escolhido para ser utilizado, tendo como papel manusear uma mesma área da memória principal para ambos pai e filho. 
 A sua leitura é feita pelo file descriptor na posição 0, e a sua escrita na posição 1. Utilizando 3 parâmetros, o primeiro da condição de escrita/leitura (1 ou 0), o segundo é o endereço do buffer que contém os dados escritos ou a serem escritos, e o terceiro parâmentro define o tamanho do buffer.
 Logo, o código abaixo foi desenvolvido dentro da AWS:
+
 ![image](https://github.com/macaaalm/sistemasOperacionais/assets/113950201/6c0c3379-aa8d-4d77-a892-d93149e8d583)
 
 Tendo como resultado o mesmo valor de value para os dois processos:
+
 ![image](https://github.com/macaaalm/sistemasOperacionais/assets/113950201/bd69ecdf-d6bb-4ac2-aa3c-c97e12c6d9be)
 
