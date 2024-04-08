@@ -1,7 +1,11 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <pthread.h>
+#include <string.h>
+#include <unistd.h>
 
+pthread_mutex_t lock;
+int i = 0;
 // tipo de dado para armazenar tempo e direcao para cada pessoa
 struct Pessoa {
     int tempo;
@@ -41,9 +45,24 @@ int escada_direcao (struct Pessoa fila[], int qtd, int tempo, int *indice){
 
 void *thread_func(void *arg) {
     struct thread_data *data = (struct thread_data *)arg;
+    //pthread_mutex_lock(&lock);
+    if (i == 0) {
+        printf("Thread criada!\n");
+        i++;
+    } else {
+        printf("Thread criada!\n");
+    } 
     while (*(data->indice) < data->qtd) {
+        pthread_mutex_lock(&lock);
         *(data->tempo) = escada_direcao(data->fila, data->qtd, *(data->tempo), data->indice);
+        printf("fila com qtd %d rodou %d\n", data->qtd, *data->tempo);
+        if (i == 1){ 
+            sleep(1);
+            i++;
+        }
+        pthread_mutex_unlock(&lock);
     }
+    //pthread_mutex_unlock(&lock);
     return NULL;
 }
 
@@ -92,14 +111,27 @@ int main(void) {
 
     struct thread_data data0 = {fila0, qtd_0, &tempo, ptr0};
     struct thread_data data1 = {fila1, qtd_1, &tempo, ptr1};
-
-    pthread_create(&thread0, NULL, thread_func, &data0);
-    pthread_create(&thread1, NULL, thread_func, &data1);
-
+    
+    pthread_mutex_init(&lock, NULL);
+   
+    if (pessoas[0].direcao == 0){
+        if(pthread_create(&thread0, NULL, thread_func, &data0) != 0){
+            printf("Erro ao criar thread0!");
+        }
+        if(pthread_create(&thread1, NULL, thread_func, &data1) != 0){
+            printf("Erro ao criar thread1!");
+        } 
+    } else{
+        if(pthread_create(&thread1, NULL, thread_func, &data1) != 0){
+            printf("Erro ao criar thread1!");
+        } 
+        if(pthread_create(&thread0, NULL, thread_func, &data0) != 0){
+            printf("Erro ao criar thread0!");
+        }
+    }
     pthread_join(thread0, NULL);
     pthread_join(thread1, NULL);
-
+    pthread_mutex_destroy(&lock);
     printf("%d\n", tempo);
     return 0;
 }
-
