@@ -3,6 +3,10 @@
 #include <unistd.h>
 #include <sys/shm.h>
 #include <string.h>
+#include <semaphore.h>
+
+const char *semNome = "Semaforo";
+sem_t s;
 
 // tipo de dado para armazenar tempo e direcao para cada pessoa
 struct Pessoa {
@@ -77,92 +81,63 @@ int main(void) {
             pessoas1++;
         }
     }
-
+    sem_init(&s,1,1);
     pid_t filhoPID = fork();
+    int t1, t2, t;
+    if (filhoPID < 0){
+      printf("Erro ao criar processo filho\n");
+    } else if (filhoPID == 0){
+      key_t chave = ftok("memoriaComp",11);
 
-  if (filhoPID < 0){
-    printf("Erro ao criar processo filho\n");
-  } else if (filhoPID == 0){
-    key_t chave = ftok("memoriaComp.txt",11);
+      int shmid = shmget(chave, sizeof(int), 0666 | IPC_CREAT);
 
-    int shmid = shmget(chave, sizeof(int), 0666 | IPC_CREAT);
+      int* tempo = (int*) shmat(shmid, (void*)0, 0);
+      *tempo = 0;
 
-    int* tempo = (int*) shmat(shmid, (void*)0, 0);
-
-    printf("Aqui eh o processo filho %d\n", filhoPID);
-    *tempo = 0;
-
-    while(indice0 < qtd_0){
+      //printf("Aqui eh o processo filho %d\n", filhoPID);
+      
+      while(indice0 < qtd_0){
+        sem_wait(&s);
+        //printf("fila0: %d\n", *tempo);
+        if (*tempo == 0){
+            sleep(1);
+        }
         *tempo = escada_direcao(fila0, qtd_0, *tempo, ptr0);
-    }
+        //printf("fila0: %d\n", *tempo);
+        sem_post(&s);
+      }
+      
+      if (pessoas[qtd_pessoas-1].direcao == 0){
+        printf("%d", *tempo);
+      }
+      shmdt(tempo);
+      return 0;
+    } else{
+      key_t chave = ftok("memoriaComp.txt",11);
 
-    shmdt(tempo);
+      int shmid = shmget(chave, sizeof(int), 0666 | IPC_CREAT);
 
-    return 0;
-    
-  } else{
-    key_t chave = ftok("memoriaComp.txt",11);
+      int* tempo = (int*) shmat(shmid, (void*)0, 0);
 
-    int shmid = shmget(chave, sizeof(int), 0666 | IPC_CREAT);
-
-    int* tempo = (int*) shmat(shmid, (void*)0, 0);
-    
-    printf("Aqui eh o processo pai %d\n", filhoPID);
-    while(indice1 < qtd_1){
+      //printf("Aqui eh o processo pai %d\n", filhoPID);
+      while(indice1 < qtd_1){
+        sem_wait(&s);
+        if (*tempo == 0){
+            sleep(1);
+        }
+        //printf("fila1: %d\n", *tempo);
         *tempo = escada_direcao(fila1, qtd_1, *tempo, ptr1);
+        //printf("fila1: %d\n", *tempo);
+        sem_post(&s);
+      }
+      if (pessoas[qtd_pessoas-1].direcao == 1){
+        printf("%d", *tempo);
+      }
+      shmdt(tempo);
+
+      shmctl(shmid, IPC_RMID, NULL);
+      return 0;
     }
-    printf("%d", *tempo);
-    
-    shmdt(tempo);
-
-    shmctl(shmid, IPC_RMID, NULL);
-
-    return 0;
-  }
-    
     // calcular tempo total
     // usando loop while para calcular cada ciclo da escada rolante
-    //printf("%d\n", tempo);
-    //return 0;
 }
-
-
-/*
-int main(void) {
-  
-  pid_t filhoPID = fork();
-
-  if (filhoPID < 0){
-    printf("Erro ao criar processo filho\n");
-  } else if (filhoPID == 0){
-    key_t chave = ftok("memoriaComp.txt",11);
-    int shmid = shmget(chave, sizeof(int), 0666 | IPC_CREAT);
-
-    int* str = (int*) shmat(shmid, (void*)0, 0);
-
-    printf("Aqui eh o processo filho %d\n", filhoPID);
-    *str = 222;
-
-    shmdt(str);
-
-    return 0;
-    
-  } else{
-    key_t chave = ftok("memoriaComp.txt",11);
-
-    int shmid = shmget(chave, sizeof(int), 0666 | IPC_CREAT);
-
-    int* str = (int*) shmat(shmid, (void*)0, 0);
-    
-    printf("Aqui eh o processo pai %d\n", filhoPID);
-    printf("%d", *str);
-    
-    shmdt(str);
-
-    shmctl(shmid, IPC_RMID, NULL);
-
-    return 0;
-  }
-}
-
-*/
