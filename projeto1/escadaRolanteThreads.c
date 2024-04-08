@@ -47,20 +47,16 @@ void *thread_func(void *arg) {
     struct thread_data *data = (struct thread_data *)arg;
     //pthread_mutex_lock(&lock);
     if (i == 0) {
-        printf("Thread criada!\n");
-        i++;
+        printf("Primeira thread criada!\n");
     } else {
-        printf("Thread criada!\n");
+        printf("Segunda thread criada!\n");
     } 
     while (*(data->indice) < data->qtd) {
         pthread_mutex_lock(&lock);
         *(data->tempo) = escada_direcao(data->fila, data->qtd, *(data->tempo), data->indice);
         printf("fila com qtd %d rodou %d\n", data->qtd, *data->tempo);
-        if (i == 1){ 
-            sleep(1);
-            i++;
-        }
         pthread_mutex_unlock(&lock);
+        sleep(1);
     }
     //pthread_mutex_unlock(&lock);
     return NULL;
@@ -118,6 +114,7 @@ int main(void) {
         if(pthread_create(&thread0, NULL, thread_func, &data0) != 0){
             printf("Erro ao criar thread0!");
         }
+        sleep(1);
         if(pthread_create(&thread1, NULL, thread_func, &data1) != 0){
             printf("Erro ao criar thread1!");
         } 
@@ -125,10 +122,12 @@ int main(void) {
         if(pthread_create(&thread1, NULL, thread_func, &data1) != 0){
             printf("Erro ao criar thread1!");
         } 
+        sleep(1);
         if(pthread_create(&thread0, NULL, thread_func, &data0) != 0){
             printf("Erro ao criar thread0!");
         }
     }
+    
     pthread_join(thread0, NULL);
     pthread_join(thread1, NULL);
     pthread_mutex_destroy(&lock);
