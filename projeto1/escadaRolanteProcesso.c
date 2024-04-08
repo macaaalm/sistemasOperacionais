@@ -3,7 +3,7 @@
 #include <unistd.h>
 #include <sys/shm.h>
 #include <string.h>
-#include <semaphore.h>
+#include <sys/semaphore.h>
 
 const char *semNome = "Semaforo";
 sem_t s;
@@ -94,17 +94,20 @@ int main(void) {
       int* tempo = (int*) shmat(shmid, (void*)0, 0);
       *tempo = 0;
 
-      //printf("Aqui eh o processo filho %d\n", filhoPID);
-      
+      printf("Aqui eh o processo filho %d\n", filhoPID);
+      if (pessoas[0].direcao == 1){
+        sleep(3);
+      } else{
+        sleep(2);
+      }
+      int i = 0;
       while(indice0 < qtd_0){
         sem_wait(&s);
-        //printf("fila0: %d\n", *tempo);
-        if (*tempo == 0){
-            sleep(1);
-        }
+        printf("fila0: %d\n", *tempo);
         *tempo = escada_direcao(fila0, qtd_0, *tempo, ptr0);
-        //printf("fila0: %d\n", *tempo);
+        printf("fila0: %d\n", *tempo);
         sem_post(&s);
+        sleep(2);
       }
       
       if (pessoas[qtd_pessoas-1].direcao == 0){
@@ -119,16 +122,21 @@ int main(void) {
 
       int* tempo = (int*) shmat(shmid, (void*)0, 0);
 
-      //printf("Aqui eh o processo pai %d\n", filhoPID);
+      printf("Aqui eh o processo pai %d\n", filhoPID);
+      
+      if (pessoas[0].direcao == 0){
+        sleep(3);
+      } else{
+        sleep(2);
+      }
+      int i = 0;
       while(indice1 < qtd_1){
         sem_wait(&s);
-        if (*tempo == 0){
-            sleep(1);
-        }
-        //printf("fila1: %d\n", *tempo);
+        printf("fila1: %d\n", *tempo);
         *tempo = escada_direcao(fila1, qtd_1, *tempo, ptr1);
-        //printf("fila1: %d\n", *tempo);
+        printf("fila1: %d\n", *tempo);
         sem_post(&s);
+        sleep(2);
       }
       if (pessoas[qtd_pessoas-1].direcao == 1){
         printf("%d", *tempo);
