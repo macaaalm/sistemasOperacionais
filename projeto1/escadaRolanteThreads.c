@@ -5,7 +5,7 @@
 #include <unistd.h>
 
 pthread_mutex_t lock;
-int i = 0;
+
 // tipo de dado para armazenar tempo e direcao para cada pessoa
 struct Pessoa {
     int tempo;
@@ -46,6 +46,7 @@ int escada_direcao (struct Pessoa fila[], int qtd, int tempo, int *indice){
 void *thread_func(void *arg) {
     struct thread_data *data = (struct thread_data *)arg;
     //pthread_mutex_lock(&lock);
+    int i = 0;
     if (i == 0) {
         printf("Primeira thread criada!\n");
     } else {
@@ -56,7 +57,7 @@ void *thread_func(void *arg) {
         *(data->tempo) = escada_direcao(data->fila, data->qtd, *(data->tempo), data->indice);
         printf("fila com qtd %d rodou %d\n", data->qtd, *data->tempo);
         pthread_mutex_unlock(&lock);
-        sleep(1);
+        sleep(2);
     }
     //pthread_mutex_unlock(&lock);
     return NULL;
