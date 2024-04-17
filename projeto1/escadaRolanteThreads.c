@@ -5,6 +5,9 @@
 #include <unistd.h>
 
 pthread_mutex_t lock;
+pthread_cond_t cond;
+int vez;
+int i = 0;
 
 // tipo de dado para armazenar tempo e direcao para cada pessoa
 struct Pessoa {
@@ -14,9 +17,13 @@ struct Pessoa {
 
 struct thread_data {
     struct Pessoa *fila;
+    struct Pessoa *outra_fila;
+    struct Pessoa *pessoas;
+    int threadid;
     int qtd;
     int *tempo;
-    int *indice;
+    int *indice_fila;
+    int *indice_outra_fila;
 };
 
 // funcao para realizar um ciclo da escada rolante (direcao 1 ou 0)
@@ -45,21 +52,37 @@ int escada_direcao (struct Pessoa fila[], int qtd, int tempo, int *indice){
 
 void *thread_func(void *arg) {
     struct thread_data *data = (struct thread_data *)arg;
-    //pthread_mutex_lock(&lock);
-    int i = 0;
     if (i == 0) {
         printf("Primeira thread criada!\n");
+        i++;
     } else {
         printf("Segunda thread criada!\n");
     } 
-    while (*(data->indice) < data->qtd) {
+
+    while (*(data->indice_fila) < data->qtd) {
         pthread_mutex_lock(&lock);
-        *(data->tempo) = escada_direcao(data->fila, data->qtd, *(data->tempo), data->indice);
-        printf("fila com qtd %d rodou %d\n", data->qtd, *data->tempo);
+        while ((vez == 1 && (data->threadid) == 0) || (vez == 0 && (data->threadid) == 1)){
+            pthread_cond_wait(&cond, &lock);
+        }
+
+        *(data->tempo) = escada_direcao(data->fila, data->qtd, *(data->tempo), data->indice_fila);
         pthread_mutex_unlock(&lock);
-        sleep(2);
+        if (data->fila[*(data->indice_fila)].tempo > data->outra_fila[*(data->indice_outra_fila)].tempo){
+            if (vez == 1 && (data->threadid == 1)){
+                vez = 0;
+            }else {
+                vez = 1;
+            }
+            pthread_cond_signal(&cond);
+        }
     }
-    //pthread_mutex_unlock(&lock);
+
+    if (vez == 1){
+        vez = 0;
+    }else{
+        vez = 1;
+    }
+    pthread_cond_signal(&cond);
     return NULL;
 }
 
@@ -106,32 +129,33 @@ int main(void) {
     int tempo = 0;
     pthread_t thread0, thread1;
 
-    struct thread_data data0 = {fila0, qtd_0, &tempo, ptr0};
-    struct thread_data data1 = {fila1, qtd_1, &tempo, ptr1};
-    
+    struct thread_data data0 = {fila0, fila1, pessoas, 0, qtd_0, &tempo, ptr0, ptr1};
+    struct thread_data data1 = {fila1, fila0, pessoas, 1, qtd_1, &tempo, ptr1, ptr0};
+
     pthread_mutex_init(&lock, NULL);
-   
+    pthread_cond_init(&cond, NULL);
     if (pessoas[0].direcao == 0){
+        vez = 0;
         if(pthread_create(&thread0, NULL, thread_func, &data0) != 0){
             printf("Erro ao criar thread0!");
         }
-        sleep(1);
         if(pthread_create(&thread1, NULL, thread_func, &data1) != 0){
             printf("Erro ao criar thread1!");
         } 
     } else{
+        vez = 1;
         if(pthread_create(&thread1, NULL, thread_func, &data1) != 0){
             printf("Erro ao criar thread1!");
-        } 
-        sleep(1);
+        }
         if(pthread_create(&thread0, NULL, thread_func, &data0) != 0){
             printf("Erro ao criar thread0!");
         }
     }
-    
+
     pthread_join(thread0, NULL);
     pthread_join(thread1, NULL);
     pthread_mutex_destroy(&lock);
+    pthread_cond_destroy(&cond);
     printf("%d\n", tempo);
     return 0;
 }
