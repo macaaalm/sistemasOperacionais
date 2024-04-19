@@ -198,7 +198,7 @@ int main(void) {
     }
 
     wait(NULL); // espera processo filho terminar
-    printf("%d", *tempo); // imprime tempo total da escada rolante
+    printf("%d\n", *tempo); // imprime tempo total da escada rolante
     shmdt(tempo); // desconectar da memoria compartilhada
 
     shmctl(shmid, IPC_RMID, NULL); // destroi segmento utilizado para memoria compartilhada
