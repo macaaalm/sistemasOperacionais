@@ -68,7 +68,7 @@ void *thread_func(void *arg) {
         
         // se o tempo de chegada da proxima pessoa da fila que esta sendo executada 
         // for maior que o tempo de chegada da proxima pessoa da fila em espera
-        if (data->fila[(data->indice_fila)].tempo > data->outra_fila[(data->indice_outra_fila)].tempo){
+        if (data->fila[*(data->indice_fila)].tempo > data->outra_fila[*(data->indice_outra_fila)].tempo){
             // passa a vez para proxima thread executar (fila)
             if (vez == 1 && (data->threadid == 1)){
                 vez = 0;
