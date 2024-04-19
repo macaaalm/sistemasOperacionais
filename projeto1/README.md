@@ -22,12 +22,15 @@
 
 #### E_1 
 Entrada pequena básica para apenas uma direção: 
+
 ![image](https://github.com/macaaalm/sistemasOperacionais/assets/113950201/a252fd6d-ce8f-4b3f-b226-2455131e1a60)
 
 Resultado:
+
 ![image](https://github.com/macaaalm/sistemasOperacionais/assets/113950201/30d82ec8-6c26-4171-bdd0-368930022690)
 
 Resultado esperado:
+
 ![image](https://github.com/macaaalm/sistemasOperacionais/assets/113950201/f24d21e1-9d72-47f0-a122-bea607e7faac)
 
 
@@ -41,6 +44,7 @@ Resultado esperado:
 
 #### E_8 
 Entrada pequena mudando direção mais aleatoriamente: 
+
 ![image](https://github.com/macaaalm/sistemasOperacionais/assets/113950201/1e7b738f-c101-4fe2-be3b-b83cef1bbbb0)
 
 Resultado:
@@ -49,6 +53,7 @@ Resultado esperado:
 
 #### E_12 
 Entrada maior mudando direção mais aleatoriamente: 
+
 ![image](https://github.com/macaaalm/sistemasOperacionais/assets/113950201/78ee8995-308d-4aa2-9556-4ce893bf6e0a)
 
 Resultado:
@@ -57,6 +62,7 @@ Resultado esperado:
 
 #### E_24 
 Exemplo de uma das maiores entradas: 
+
 ![image](https://github.com/macaaalm/sistemasOperacionais/assets/113950201/f17442bb-0292-4fd1-b8b3-442c66692739)
 
 Resultado:
