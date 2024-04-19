@@ -27,7 +27,7 @@ Entrada pequena básica para apenas uma direção:
 
 Resultado:
 
-![image](https://github.com/macaaalm/sistemasOperacionais/assets/113950201/30d82ec8-6c26-4171-bdd0-368930022690)
+![image](https://github.com/macaaalm/sistemasOperacionais/assets/113950201/b4662c7d-dfe4-4c19-838e-ff71c71f0067)
 
 Resultado esperado:
 
@@ -36,6 +36,7 @@ Resultado esperado:
 
 #### E_3 
 Entrada pequena alternando direções: 
+
 ![image](https://github.com/macaaalm/sistemasOperacionais/assets/113950201/c813f6bd-341e-4704-9c3b-acd133546cd7)
 
 Resultado:
