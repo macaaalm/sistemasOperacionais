@@ -25,7 +25,10 @@ Entrada pequena básica para apenas uma direção:
 
 ![image](https://github.com/macaaalm/sistemasOperacionais/assets/113950201/a252fd6d-ce8f-4b3f-b226-2455131e1a60)
 
-Resultado:
+Resultado com Threads:
+
+
+Resultado com processos:
 
 ![image](https://github.com/macaaalm/sistemasOperacionais/assets/113950201/365088f9-0548-4e26-b6ef-66a4159de685)
 
@@ -39,7 +42,10 @@ Entrada pequena alternando direções:
 
 ![image](https://github.com/macaaalm/sistemasOperacionais/assets/113950201/c813f6bd-341e-4704-9c3b-acd133546cd7)
 
-Resultado:
+Resultado com Threads:
+
+
+Resultado com Processos:
 
 ![image](https://github.com/macaaalm/sistemasOperacionais/assets/113950201/d226ba59-c4aa-455b-9bc0-7fe8d054d98b)
 
@@ -81,7 +87,11 @@ Exemplo de uma das maiores entradas:
 
 ![image](https://github.com/macaaalm/sistemasOperacionais/assets/113950201/f17442bb-0292-4fd1-b8b3-442c66692739)
 
-Resultado:
+Resultado com Threads:
+
+![image](https://github.com/macaaalm/sistemasOperacionais/assets/113950201/d5dd5707-87f6-408f-8659-69fcc62a4ad4)
+
+Resultado com Processos:
 
 ![image](https://github.com/macaaalm/sistemasOperacionais/assets/113950201/3ad053b0-7add-4d93-b7c9-b334145e48c9)
 
