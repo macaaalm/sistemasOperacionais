@@ -2,7 +2,7 @@
 #include <stdlib.h>
 #include <unistd.h>
 #include <sys/shm.h>
-#include <wait.h>
+#include <sys/wait.h>
 
 // tipo de dado para armazenar tempo e direcao para cada pessoa
 struct Pessoa {
@@ -120,6 +120,7 @@ int main(void) {
   *vez = primeiro;
      
   // loop para o tempo de cada ciclo da escada rolante para a direcao 0
+  // garantir que todas as pessoas na direcao 0 usem a escada rolante
   while(*indice0 < qtd_0){
 
     // busy waiting para esperar a vez de executar a direcao 0 na escada rolante
@@ -176,6 +177,7 @@ int main(void) {
     *vez = primeiro;
 
     // loop para o tempo de cada ciclo da escada rolante para a direcao 1
+    // garantir que todas as pessoas na direcao 1 usem a escada rolante
     while(*indice1 < qtd_1){
 
       // busy waiting para esperar a vez de executar a direcao 1 na escada rolante
@@ -196,7 +198,7 @@ int main(void) {
     }
 
     wait(NULL); // espera processo filho terminar
-    printf("%d\n", *tempo); // imprime tempo total da escada rolante
+    printf("%d", *tempo); // imprime tempo total da escada rolante
     shmdt(tempo); // desconectar da memoria compartilhada
 
     shmctl(shmid, IPC_RMID, NULL); // destroi segmento utilizado para memoria compartilhada
