@@ -27,7 +27,7 @@ Entrada pequena básica para apenas uma direção:
 
 Resultado:
 
-![image](https://github.com/macaaalm/sistemasOperacionais/assets/113950201/b4662c7d-dfe4-4c19-838e-ff71c71f0067)
+![image](https://github.com/macaaalm/sistemasOperacionais/assets/113950201/365088f9-0548-4e26-b6ef-66a4159de685)
 
 Resultado esperado:
 
