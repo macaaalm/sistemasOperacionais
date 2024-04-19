@@ -20,7 +20,7 @@
 
 ### Testes pertinentes
 
-#### E_1 
+### E_1 
 Entrada pequena básica para apenas uma direção: 
 
 ![image](https://github.com/macaaalm/sistemasOperacionais/assets/113950201/a252fd6d-ce8f-4b3f-b226-2455131e1a60)
@@ -34,7 +34,7 @@ Resultado esperado:
 ![image](https://github.com/macaaalm/sistemasOperacionais/assets/113950201/f24d21e1-9d72-47f0-a122-bea607e7faac)
 
 
-#### E_3 
+### E_3 
 Entrada pequena alternando direções: 
 
 ![image](https://github.com/macaaalm/sistemasOperacionais/assets/113950201/c813f6bd-341e-4704-9c3b-acd133546cd7)
