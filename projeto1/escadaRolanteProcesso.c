@@ -60,7 +60,9 @@ int main(void) {
       qtd_1++;
     }
   }
-
+  
+  fclose(arquivo); // fechar arquivo
+  
   // alocar pessoas em filas (arrays) de acordo com a direcao
   struct Pessoa fila0 [qtd_0];
   struct Pessoa fila1 [qtd_1];
