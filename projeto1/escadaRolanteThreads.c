@@ -1,13 +1,12 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <pthread.h>
-#include <string.h>
-#include <unistd.h>
+//#include <unistd.h>
 
+// criar variaveis globais: mutex, variavel condicional e vez
 pthread_mutex_t lock;
 pthread_cond_t cond;
-int vez;
-int i = 0;
+int vez; // armazena valor para decidir qual thread deve executar
 
 // tipo de dado para armazenar tempo e direcao para cada pessoa
 struct Pessoa {
@@ -15,6 +14,7 @@ struct Pessoa {
     int direcao;
 };
 
+// tipo de dado para armazenar informacoes enviadas para as threads
 struct thread_data {
     struct Pessoa *fila;
     struct Pessoa *outra_fila;
@@ -49,40 +49,48 @@ int escada_direcao (struct Pessoa fila[], int qtd, int tempo, int *indice){
     return t+10;
 }
 
-
+// funcao que cada thread executara
 void *thread_func(void *arg) {
     struct thread_data *data = (struct thread_data *)arg;
-    if (i == 0) {
-        printf("Primeira thread criada!\n");
-        i++;
-    } else {
-        printf("Segunda thread criada!\n");
-    } 
-
+    
+    // loop para garantir que todas as pessoas (direcao 0 e 1) usem a escada rolante
     while (*(data->indice_fila) < data->qtd) {
+
+        // thread pega o "cadeado", garante o direito de executar ciclos na escada rolante
         pthread_mutex_lock(&lock);
-        while ((vez == 1 && (data->threadid) == 0) || (vez == 0 && (data->threadid) == 1)){
+
+        // se thread0 ou thread1 esta executando na vez em que outra thread deveria ser executada
+        if ((vez == 1 && (data->threadid) == 0) || (vez == 0 && (data->threadid) == 1)){
+            // libera o "cadeado" e espera sinal para voltar a executar
             pthread_cond_wait(&cond, &lock);
         }
-
         *(data->tempo) = escada_direcao(data->fila, data->qtd, *(data->tempo), data->indice_fila);
-        pthread_mutex_unlock(&lock);
-        if (data->fila[*(data->indice_fila)].tempo > data->outra_fila[*(data->indice_outra_fila)].tempo){
+        
+        // se o tempo de chegada da proxima pessoa da fila que esta sendo executada 
+        // for maior que o tempo de chegada da proxima pessoa da fila em espera
+        if (data->fila[(data->indice_fila)].tempo > data->outra_fila[(data->indice_outra_fila)].tempo){
+            // passa a vez para proxima thread executar (fila)
             if (vez == 1 && (data->threadid == 1)){
                 vez = 0;
             }else {
                 vez = 1;
             }
+            // manda um sinal para acordar thread em espera
             pthread_cond_signal(&cond);
         }
+        // libera o "cadeado"
+        pthread_mutex_unlock(&lock);
     }
-
+    
+    // se uma das filas nao possui mais pessoas, 
+    // faz a outra fila executar uma ultima vez
     if (vez == 1){
         vez = 0;
     }else{
         vez = 1;
     }
     pthread_cond_signal(&cond);
+
     return NULL;
 }
 
@@ -95,12 +103,16 @@ int main(void) {
     ptr0 = &indice0;
     ptr1 = &indice1;
 
-    // le arquivo e cria vetor de pessoas
-    arquivo = fopen ("teste.txt", "r");
+    // ler arquivo e criar vetor de pessoas
+    arquivo = fopen ("entrada.txt", "r");
+    if (arquivo == NULL){ // erro ao abrir arquivo
+        printf("Erro ao abrir arquivo");
+        return -1;
+    }
     fscanf(arquivo, "%d", &qtd_pessoas);
     struct Pessoa pessoas [qtd_pessoas];
 
-    // calcular quantas pessoas em cada direcao
+    // atribuir valores para vetor "pessoas" e calcular quantas pessoas em cada direcao
     for (i = 0; i < qtd_pessoas; i++) {
         fscanf(arquivo, "%d %d", &pessoas[i].tempo, &pessoas[i].direcao);
         if (pessoas[i].direcao == 0){
@@ -109,6 +121,8 @@ int main(void) {
             qtd_1++;
         }
     }
+
+    fclose(arquivo); // fechar arquivo
 
     // alocar pessoas em filas (arrays) de acordo com a direcao
     struct Pessoa fila0 [qtd_0];
@@ -124,38 +138,50 @@ int main(void) {
         }
     }
 
-    // calcular tempo total
-    // usando loop while para calcular cada ciclo da escada rolante
+    // criar variavel tempo e duas threads, uma pra cada direcao
     int tempo = 0;
     pthread_t thread0, thread1;
 
+    // criar variaveis "thread_data", que sao os argumentos passados para thread
     struct thread_data data0 = {fila0, fila1, pessoas, 0, qtd_0, &tempo, ptr0, ptr1};
     struct thread_data data1 = {fila1, fila0, pessoas, 1, qtd_1, &tempo, ptr1, ptr0};
-
+    
+    // inicializar variaveis lock e cond, com atributos padrao
     pthread_mutex_init(&lock, NULL);
     pthread_cond_init(&cond, NULL);
+
+    // se primeira pessoa a usar a escada rolante for na direcao 0
     if (pessoas[0].direcao == 0){
         vez = 0;
+        // criar primeiro a thread0 (ciclos da escada rolante para direcao 0)
         if(pthread_create(&thread0, NULL, thread_func, &data0) != 0){
             printf("Erro ao criar thread0!");
         }
+        // apos a criacao da thread 0, criar thread1 (ciclos da escada rolante para direcao 1)
         if(pthread_create(&thread1, NULL, thread_func, &data1) != 0){
             printf("Erro ao criar thread1!");
         } 
     } else{
         vez = 1;
+        // criar primeiro a thread1 (ciclos da escada rolante para direcao 1)
         if(pthread_create(&thread1, NULL, thread_func, &data1) != 0){
             printf("Erro ao criar thread1!");
         }
+        // apos a criacao da thread 1, criar thread0 (ciclos da escada rolante para direcao 0)
         if(pthread_create(&thread0, NULL, thread_func, &data0) != 0){
             printf("Erro ao criar thread0!");
         }
     }
-
+    
+    // esperar as threads terminarem a execucao
     pthread_join(thread0, NULL);
     pthread_join(thread1, NULL);
+
+    // destruir as variaveis lock e cond
     pthread_mutex_destroy(&lock);
     pthread_cond_destroy(&cond);
+
+    // imprimir tempo total 
     printf("%d\n", tempo);
     return 0;
 }
