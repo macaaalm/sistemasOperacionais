@@ -185,4 +185,3 @@ int main(void) {
     printf("%d\n", tempo);
     return 0;
 }
-
