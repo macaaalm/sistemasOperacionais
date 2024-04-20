@@ -32,11 +32,11 @@ Os processos simulam o uso da escada rolante para uma direção específica (pro
 
 #### Em Threads:
 
-Ao utilizar a variável 'vez' para decidir qual direção deve ser executada primeiro. Uma variável condicional (`lock`) é utilizada em conjunto com o mutex para garantir que apenas uma pessoa por vez, em uma direção específica, tenha acesso ao código que calcula o tempo de uso da escada rolante. Isso significa que as pessoas em direções diferentes aguardam a finalização do uso da escada pela direção atual antes de acessá-la.
+Ao utilizar a variável 'vez' para decidir qual direção deve ser executada primeiro. Uma variável condicional ('cond') é utilizada em conjunto com o mutex para garantir que apenas uma pessoa por vez, em uma direção específica, tenha acesso ao código que calcula o tempo de uso da escada rolante. Isso significa que as pessoas em direções diferentes aguardam a finalização do uso da escada pela direção atual antes de acessá-la.
 
 #### Em Processos:
 
-No código, além da mesma variável 'vez', é adotada a técnica de "busy waiting" para coordenar o acesso à escada rolante entre os processos. Isso significa que o processo que não está na vez de utilizar a escada fica em um loop `while`, aguardando até que seja sua vez de executar. Essa abordagem garante que apenas um processo por vez, em cada direção, evitando acesso simultâneo e garantindo uma utilização ordenada e segura do recurso.
+No código, além da mesma variável 'vez', é adotada a técnica de "busy waiting" para coordenar o acesso à escada rolante entre os processos. Isso significa que o processo que não está na vez de utilizar a escada fica em um loop 'while', aguardando até que seja sua vez de executar. Essa abordagem garante que apenas um processo por vez, em cada direção, evitando acesso simultâneo e garantindo uma utilização ordenada e segura do recurso.
 
 ### 3. Discorra sobre as diferenças entre as implementações utilizando threads e processos e diga qual foi mais eficiente na solução do problema, justificando sua resposta.
 
