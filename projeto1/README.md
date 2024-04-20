@@ -8,7 +8,7 @@
 
 ### Problema implementado com Threads: 
 
-A implementação do problema com threads coemça com a criação de variáveis globais, sendo elas 'mutex', 'variavel condicional' e 'vez'. A variável vez armazenará o valor para decidir qual thread irá ser executada. Dois tipos de estrutura de dados serão utilizados: 'Pessoa', que armazenará tempo e direção de cada pessoa, e 'thread_data', que irá as informações enviadas para as threads. 
+A implementação do problema com threads começa com a criação de variáveis globais, sendo elas 'mutex', 'variavel condicional' e 'vez'. A variável vez armazenará o valor para decidir qual thread irá ser executada. Dois tipos de estrutura de dados serão utilizados: 'Pessoa', que armazenará tempo e direção de cada pessoa, e 'thread_data', que irá as informações enviadas para as threads. 
 
 A função 'escada_direcao' simula um ciclo da escada rolante em uma determinada direção (0 ou 1), e itera sobre as pessoas na fila e calcula o tempo necessário para que todas as pessoas da fila atual utilizem a escada naquele ciclo. A função 'thread_func' é a função que cada thread executará, ela controla o acesso concorrente à escada, garantindo que apenas uma thread execute de cada vez. As threads aguardam sua vez de acordo com a variável vez e utilizam a variável condicional para esperar ou serem notificadas de que é sua vez de executar. 
 
@@ -25,7 +25,7 @@ Os processos simulam o uso da escada rolante para uma direção específica (pro
 
 ### 1. Qual a estratégia que você utilizou para evitar que duas pessoas acessem a escada rolante ao mesmo tempo em cada abordagem?
 
-Em ambas as abordagens, a prevenção de duas pessoas acessarem a escada rolante ao mesmo tempo em direções opostas é alcançada através de um cálculo sequencial do ciclo em uma direção. Após cada ciclo, é verificado qual seria a próxima pessoa a utilizar a escada, considerando a pessoa com o menor tempo de chegada. Isso garante que somente uma pessoa entre em cada direção por ciclo, evitando conflitos de acesso à escada rolante.
+Em ambas as abordagens, a prevenção de duas pessoas acessarem a escada rolante ao mesmo tempo em direções opostas é alcançada através de um cálculo sequencial do ciclo em uma direção. Após cada ciclo, é verificado qual seria a próxima pessoa a utilizar a escada, considerando a pessoa com o menor tempo de chegada, e assim criando um novo ciclo da escada rolante baseado na direção dessa pessoa. Isso garante que somente uma pessoa entre em cada direção por ciclo, evitando conflitos de acesso à escada rolante.
 
 ### 2. Como garantir que somente uma das direções está ativa de cada vez em cada uma das abordagens?
 
