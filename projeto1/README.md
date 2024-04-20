@@ -23,12 +23,12 @@ Os processos simulam o uso da escada rolante para uma direção específica (pro
 
 ### Perguntas: 
 
-#### 1. Qual a estratégia que você utilizou para evitar que duas pessoas acessem a escada rolante ao mesmo tempo em cada abordagem?
+### 1. Qual a estratégia que você utilizou para evitar que duas pessoas acessem a escada rolante ao mesmo tempo em cada abordagem?
 
 
 
 
-#### 2. Como garantir que somente uma das direções está ativa de cada vez em cada uma das abordagens?
+### 2. Como garantir que somente uma das direções está ativa de cada vez em cada uma das abordagens?
 
 #### Em Threads:
 
@@ -38,7 +38,7 @@ Ao utilizar a variável 'vez' para decidir qual direção deve ser executada pri
 
 No código, além da mesma variável 'vez', é adotada a técnica de "busy waiting" para coordenar o acesso à escada rolante entre os processos. Isso significa que o processo que não está na vez de utilizar a escada fica em um loop `while`, aguardando até que seja sua vez de executar. Essa abordagem garante que apenas um processo por vez, em cada direção, evitando acesso simultâneo e garantindo uma utilização ordenada e segura do recurso.
 
-#### 3. Discorra sobre as diferenças entre as implementações utilizando threads e processos e diga qual foi mais eficiente na solução do problema, justificando sua resposta.
+### 3. Discorra sobre as diferenças entre as implementações utilizando threads e processos e diga qual foi mais eficiente na solução do problema, justificando sua resposta.
 
 A abordagem com threads é mais eficiente devido à sua capacidade de controlar o acesso à escada rolante de forma mais precisa. Utilizando uma variável condicional, ela assegura que uma thread em espera só retome sua execução quando a thread ativa sinaliza. Isso implica que apenas uma thread está realmente em atividade, ou seja, consumindo recursos de processamento, durante sua vez de utilizar a escada.
 
