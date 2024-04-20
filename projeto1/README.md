@@ -25,8 +25,7 @@ Os processos simulam o uso da escada rolante para uma direção específica (pro
 
 ### 1. Qual a estratégia que você utilizou para evitar que duas pessoas acessem a escada rolante ao mesmo tempo em cada abordagem?
 
-
-
+Em ambas as abordagens, a prevenção de duas pessoas acessarem a escada rolante ao mesmo tempo em direções opostas é alcançada através de um cálculo sequencial do ciclo em uma direção. Após cada ciclo, é verificado qual seria a próxima pessoa a utilizar a escada, considerando a pessoa com o menor tempo de chegada. Isso garante que somente uma pessoa entre em cada direção por ciclo, evitando conflitos de acesso à escada rolante.
 
 ### 2. Como garantir que somente uma das direções está ativa de cada vez em cada uma das abordagens?
 
@@ -65,7 +64,7 @@ Resultado esperado:
 
 
 ### E_8 
-Entrada pequena mudando direção mais aleatoriamente: 
+Entrada pequena mudando direção aleatoriamente: 
 
 ![image](https://github.com/macaaalm/sistemasOperacionais/assets/113950201/1e7b738f-c101-4fe2-be3b-b83cef1bbbb0)
 
@@ -83,7 +82,7 @@ Resultado esperado:
 
 
 ### E_12 
-Entrada maior mudando direção mais aleatoriamente: 
+Entrada maior mudando direção aleatoriamente: 
 
 ![image](https://github.com/macaaalm/sistemasOperacionais/assets/113950201/78ee8995-308d-4aa2-9556-4ce893bf6e0a)
 
