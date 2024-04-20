@@ -10,7 +10,7 @@
 
 A implementação do problema com threads começa com a criação de variáveis globais, sendo elas 'mutex', 'variavel condicional' e 'vez'. A variável vez armazenará o valor para decidir qual thread irá ser executada. Dois tipos de estrutura de dados serão utilizados: 'Pessoa', que armazenará tempo e direção de cada pessoa, e 'thread_data', que irá as informações enviadas para as threads. 
 
-A função 'escada_direcao' simula um ciclo da escada rolante em uma determinada direção (0 ou 1), e itera sobre as pessoas na fila e calcula o tempo necessário para que todas as pessoas da fila atual utilizem a escada naquele ciclo. A função 'thread_func' é a função que cada thread executará, ela controla o acesso concorrente à escada, garantindo que apenas uma thread execute de cada vez. As threads aguardam sua vez de acordo com a variável vez e utilizam a variável condicional para esperar ou serem notificadas de que é sua vez de executar. 
+A função 'escada_direcao' simula um ciclo da escada rolante em uma determinada direção (0 ou 1), e itera sobre as pessoas na fila e calcula o tempo necessário para que todas as pessoas da fila atual utilizem a escada naquele ciclo. A função 'thread_func' é a função que cada thread executará, ela controla o acesso concorrente à escada, e ao utilizar mutex e lock, garantem que apenas uma thread execute de cada vez. As threads aguardam sua vez de acordo com a variável vez e utilizam a variável condicional para esperar ou serem notificadas de que é sua vez de executar.
 
 Por fim, a função main irá ler os dados de um arquivo (entrada.txt), criar as filas de pessoas com base na direção em que elas estão se movendo, inicializar as variáveis e estruturas necessárias, criar duas threads (uma para cada direção da escada) e aguardar a conclusão da execução das threads. Após isso, imprime o tempo total de utilização da escada.
 
@@ -31,7 +31,7 @@ Em ambas as abordagens, a prevenção de duas pessoas acessarem a escada rolante
 
 #### Em Threads:
 
-Ao utilizar a variável 'vez' para decidir qual direção deve ser executada primeiro. Uma variável condicional ('cond') é utilizada em conjunto com o mutex para garantir que apenas uma pessoa por vez, em uma direção específica, tenha acesso ao código que calcula o tempo de uso da escada rolante. Isso significa que as pessoas em direções diferentes aguardam a finalização do uso da escada pela direção atual antes de acessá-la.
+Ao utilizar a variável 'vez' para decidir qual direção deve ser executada primeiro. Uma variável condicional ('cond') é utilizada em conjunto com o mutex para garantir apenas uma direção por vez tenha acesso ao código que calcula o tempo de uso da escada rolante. Isso significa que as pessoas em direções diferentes aguardam a finalização do uso da escada pela direção atual antes de acessá-la.
 
 #### Em Processos:
 
