@@ -44,6 +44,7 @@ Entrada pequena alternando direções:
 
 Resultado com Threads:
 
+![image](https://github.com/macaaalm/sistemasOperacionais/assets/113950201/d9a04726-4c20-4217-b450-e8639328be0c)
 
 Resultado com Processos:
 
@@ -59,7 +60,11 @@ Entrada pequena mudando direção mais aleatoriamente:
 
 ![image](https://github.com/macaaalm/sistemasOperacionais/assets/113950201/1e7b738f-c101-4fe2-be3b-b83cef1bbbb0)
 
-Resultado:
+Resultado com Threads:
+
+![image](https://github.com/macaaalm/sistemasOperacionais/assets/113950201/b57d25b0-5f38-4e1f-abd5-11c5d7f707c5)
+
+Resultado com Processos:
 
 ![image](https://github.com/macaaalm/sistemasOperacionais/assets/113950201/65fb25e2-1f16-4f34-982a-da50bca98eca)
 
@@ -73,7 +78,11 @@ Entrada maior mudando direção mais aleatoriamente:
 
 ![image](https://github.com/macaaalm/sistemasOperacionais/assets/113950201/78ee8995-308d-4aa2-9556-4ce893bf6e0a)
 
-Resultado:
+Resultado com Threads:
+
+![image](https://github.com/macaaalm/sistemasOperacionais/assets/113950201/d3ed835c-8f98-4c35-92bf-6144464e43c5)
+
+Resultado com Processos:
 
 ![image](https://github.com/macaaalm/sistemasOperacionais/assets/113950201/68203b3e-e1e5-4126-9366-59b8939188cc)
 
