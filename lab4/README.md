@@ -12,8 +12,8 @@
 
 ## Construa uma solução utilizando pthreads para resolver o problema da multiplicação matriz-vetor
 
-## Implementação de `pthread_matrizvetor.c`
-
+## Implementação 
+###  `pthread_matrizvetor.c`
 Primeiramente, recebemos a entrada do usuário para as dimensões da matriz. Alocamos dinamicamente espaço na memória para a matriz, vetor e o resultado (outro vetor) utilizando ponteiros e a função `malloc()`. Em seguida, solicitamos ao usuário que insira os valores para os elementos da matriz e do vetor. Para preparar o uso de threads, criamos um vetor de threads (também alocado dinamicamente) e um vetor de estruturas "thread_data", cada uma associada a um elemento a ser calculado no vetor "resultado".
 
 Antes de criar cada thread, foram atribuídos valores que serão passados como parâmetros, incluindo a linha da matriz (vetor), o vetor, o resultado (vetor), o número de colunas (int) e o índice (int). O número de colunas controlará o loop for para calcular um elemento do resultado, enquanto o índice determinará qual elemento do resultado armazenará o valor calculado.
