@@ -18,7 +18,7 @@ Primeiramente, recebemos a entrada do usuário para as dimensões da matriz. Alo
 
 Antes de criar cada thread, foram atribuídos valores que serão passados como parâmetros, incluindo a linha da matriz (vetor), o vetor, o resultado (vetor), o número de colunas (int) e o índice (int). O número de colunas controlará o loop for para calcular um elemento do resultado, enquanto o índice determinará qual elemento do resultado armazenará o valor calculado.
 
-A função `thread_func` implementa a operação realizada por cada thread do programa. Para cada elemento no vetor e na linha da matriz passada como argumento, do índice 0 até a quantidade de colunas menos um, é realizado o cálculo da multiplicação desses valores. O resultado é então somado ao valor do elemento no vetor `resultado[data->indice]`. Essa função é responsável por calcular os elementos individuais do vetor resultado em paralelo, aproveitando a concorrência proporcionada pelo uso de threads.
+A função `thread_func` implementa a operação realizada por cada thread do programa. Para cada elemento no vetor e na linha da matriz passada como argumento, do índice 0 até a quantidade de colunas menos um, é realizado o cálculo da multiplicação desses valores. O resultado é então somado ao valor do elemento no vetor `resultado[data->indice]`. Essa função é responsável por calcular os elementos individuais do vetor resultado, aproveitando a concorrência proporcionada pelo uso de threads.
 
 Utilizando a função `pthread_create`, todas as threads a serem utilizadas foram criadas. Em seguida, ao empregar a função `pthread_join` para cada thread, o programa espera que todas elas terminem a execução antes de prosseguir.
 
