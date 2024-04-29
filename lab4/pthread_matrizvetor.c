@@ -102,10 +102,9 @@ for (int i = 0; i < linhas; i++) {
   for (int i = 0; i < linhas; i++) {
     printf("%d\n", vetor[i]);
   }
-  printf("\nResultado: ");
+  printf("\nResultado: \n");
     for (int j = 0; j < linhas; j++){
-        printf("%d ", resultado[j]);
+        printf("%d \n", resultado[j]);
     }
-  printf("\n");
   return 0;
 }
