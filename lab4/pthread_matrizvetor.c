@@ -17,7 +17,7 @@ int** alocar_matriz(int linhas, int colunas){
     // alocar memoria para linhas da matriz (vetores de inteiros)
     matriz = (int**)malloc(sizeof(int*)*linhas);
     for (int i = 0; i < linhas; i++){
-        // alocar memoria para colunas da matriz (inteiros)
+        // alocar memoria para colunas da matriz (inteiros), que sao armazenados dentro do vetor de cada linha
         matriz[i] = (int*)malloc(sizeof(int)*colunas);
     }
     return matriz;
@@ -30,7 +30,7 @@ void inserir_valores(int** matriz, int* vetor, int linhas, int colunas){
     printf("\nInsira os valores para os elementos da matriz:\n");
     for (int i = 0; i < linhas; i++){
         for (int j = 0; j < colunas; j++){
-            printf("matriz[%d][%d]:", i, j);
+            printf("matriz[%d][%d]: ", i, j);
             scanf("%d",&num);
             matriz[i][j] = num;
         }
@@ -38,7 +38,7 @@ void inserir_valores(int** matriz, int* vetor, int linhas, int colunas){
 
     printf("\nInsira os valores para os elementos do vetor:\n");
     for (int i = 0; i < colunas; i++){
-        printf("vetor[%d]:", i);
+        printf("vetor[%d]: ", i);
         scanf("%d",&num);
         vetor[i] = num;
     }
@@ -48,7 +48,7 @@ void inserir_valores(int** matriz, int* vetor, int linhas, int colunas){
 void *thread_func(void *arg){
     struct thread_data *data = (struct thread_data *)arg;
 
-    // calculo do elementos[data->indice] do vetor resultado
+    // calculo do elemento[data->indice] do vetor resultado
     for (int i = 0; i < data->colunas; i++){
         data->resultado[data->indice] += data->linha_matriz[i]*data->vetor[i];
     }
@@ -76,7 +76,7 @@ int main(void){
 
     resultado = (int*)malloc(sizeof(int)*linhas);
 
-    // receber dados de input do usuario
+    // receber input do usuario
     inserir_valores(matriz, vetor, linhas, colunas);
 
     // criar um vetor de threads (utilizando ponteiro)
@@ -106,6 +106,7 @@ int main(void){
     }
 
     // imprimir valores da matriz, vetor e resultado para o usuario
+
     printf("\nMatriz:\n");
     for (int i = 0; i < linhas; i++) {
         for (int j = 0; j < colunas; j++) {
