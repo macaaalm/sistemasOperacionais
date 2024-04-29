@@ -1,63 +1,111 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <pthread.h>
-#define N 3
 
-int matriz[N][N] = {{5, 3, 1}, {1, 2, 7}, {6, 3, 9}};
-int vetor[N] = {5, 1, 3};
+struct thread_data {
+  int *linha_matriz;
+  int *vetor;
+  int *resultado;
+  int colunas;
+  int indice;
+};
 
-typedef struct {
-  int linha;  
-  int resultado; 
-} ThreadArgs;
-
-// funcao que thread executara
-void *phtread_matrizvetor(void *arg) {
-  ThreadArgs *args = (ThreadArgs *)arg;
-  args->resultado = 0;
-  for (int i = 0; i < N; i++) {
-    args->resultado += matriz[args->linha][i] * vetor[i];
+int** alocar_matriz(int linhas, int colunas){
+  int** matriz;
+  matriz = (int**)malloc(sizeof(int*)*linhas);
+  for (int i = 0; i < linhas; i++) {
+    matriz[i] = (int*)malloc(sizeof(int)*colunas);
   }
-  pthread_exit(NULL);
+  return matriz;
 }
 
-int main() {
-  pthread_t threads[N];
-  ThreadArgs args[N];
-
-  // criando threads
-  for (int i = 0; i < N; i++) {
-    args[i].linha = i;
-    if (pthread_create(&threads[i], NULL, phtread_matrizvetor, (void *)&args[i]) != 0) {
-      perror("ERRO em pthread_create");
-      exit(EXIT_FAILURE);
+void inserir_valores(int** matriz, int* vetor, int linhas, int colunas){
+  int num;
+  printf("\nInsira os valores para os elementos da matriz:\n");
+  for (int i = 0; i < linhas; i++){
+    for (int j = 0; j < colunas; j++){
+      printf("matriz[%d][%d]:", i, j);
+      scanf("%d",&num);
+      matriz[i][j] = num;
     }
   }
 
-  int resultado[N];
-  for (int i = 0; i < N; i++) {
-    pthread_join(threads[i], NULL);
-    resultado[i] = args[i].resultado;
+  printf("\nInsira os valores para os elementos do vetor:\n");
+  for (int i = 0; i < colunas; i++){
+    printf("vetor[%d]:", i);
+    scanf("%d",&num);
+    vetor[i] = num;
+  }
+}
+
+void *thread_func(void *arg){
+  struct thread_data *data = (struct thread_data *)arg;
+
+  for (int i = 0; i < data->colunas; i++){
+    data->resultado[data->indice] += data->linha_matriz[i]*data->vetor[i];
+    //printf("data: %d\n",data->resultado[data->indice]);
   }
 
-  printf("Matriz:\n");
-  for (int i = 0; i < N; i++) {
-    for (int j = 0; j < N; j++) {
+  return NULL;
+}
+
+int main(void){
+  int linhas, colunas;
+  int **matriz;
+  int *vetor;
+  int *resultado;matriz = (int**)malloc(sizeof(int*)*linhas);
+for (int i = 0; i < linhas; i++) {
+  matriz[i] = (int*)malloc(sizeof(int)*colunas);
+}
+
+  printf("Informe o numero de linhas da matriz: ");
+  scanf("%d",&linhas);
+  printf("Informe o numero de colunas da matriz: ");
+  scanf("%d",&colunas);
+
+  matriz = alocar_matriz(linhas, colunas);
+
+  vetor = (int*)malloc(sizeof(int)*colunas);
+
+  resultado = (int*)malloc(sizeof(int)*linhas);
+
+  inserir_valores(matriz, vetor, linhas, colunas);
+
+  pthread_t *threads;
+  threads = (pthread_t*)malloc(sizeof(pthread_t)*linhas);
+
+  struct thread_data *data;
+  data = (struct thread_data*)malloc(sizeof(struct thread_data)*linhas);
+
+  for (int i = 0; i < linhas; i++){
+    data[i].linha_matriz = matriz[i];
+    data[i].vetor = vetor;
+    data[i].resultado = resultado;
+    data[i].colunas = colunas;
+    data[i].indice = i;
+    pthread_create(&threads[i], NULL, thread_func, &data[i]);
+  }
+
+  for (int i = 0; i < linhas; i++){
+    pthread_join(threads[i], NULL);
+  }
+
+  printf("\nMatriz:\n");
+  for (int i = 0; i < linhas; i++) {
+    for (int j = 0; j < linhas; j++) {
       printf("%d ", matriz[i][j]);
     }
     printf("\n");
   }
 
   printf("\nVetor:\n");
-  for (int i = 0; i < N; i++) {
+  for (int i = 0; i < linhas; i++) {
     printf("%d\n", vetor[i]);
   }
-
   printf("\nResultado: ");
-  for (int i = 0; i < N; i++) {
-    printf("%d ", resultado[i]);
-  }
-
+    for (int j = 0; j < linhas; j++){
+        printf("%d ", resultado[j]);
+    }
+  printf("\n");
   return 0;
 }
-
