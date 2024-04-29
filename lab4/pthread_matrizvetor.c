@@ -23,6 +23,28 @@ int** alocar_matriz(int linhas, int colunas){
     return matriz;
 }
 
+// inicializar elementos com 0
+void inicializar_valores(int **matriz, int* vetor, int* resultado, int linhas, int colunas){
+
+    // elementos da matriz inicializados com 0
+    for (int i = 0; i < linhas; i++){
+        for (int j = 0; j < colunas; j++){
+            matriz[i][j] = 0;
+        }
+    }
+
+    // elementos do vetor inicializados com 0
+    for (int i = 0; i < colunas; i++){
+        vetor[i] = 0;
+    }
+
+    // elementos do resultado inicializados com 0
+    for (int i = 0; i < linhas; i++){
+        resultado[i] = 0;
+    }
+
+}
+
 // funcao para inserir valores para os elementos da matriz e do vetor
 void inserir_valores(int** matriz, int* vetor, int linhas, int colunas){
     int num;
@@ -75,6 +97,8 @@ int main(void){
     vetor = (int*)malloc(sizeof(int)*colunas);
 
     resultado = (int*)malloc(sizeof(int)*linhas);
+
+    inicializar_valores(matriz, vetor, resultado, linhas, colunas);
 
     // receber input do usuario
     inserir_valores(matriz, vetor, linhas, colunas);
