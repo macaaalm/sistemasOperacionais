@@ -1,12 +1,7 @@
 #define _GNU_SOURCE
 #include <stdlib.h>
-#include <malloc.h>
-#include <sys/types.h>
-#include <sys/wait.h>
-#include <signal.h>
-#include <sched.h>
 #include <stdio.h>
-#include <pthread.h> //pthread para usar mutex
+#include <pthread.h>
 
 //64kB stack
 #define FIBER_STACK 1024*64
@@ -17,8 +12,8 @@ struct c {
 };
 
 struct thread_data {
-    struct c c1;
-    struct c c2;
+    struct c *c1;
+    struct c *c2;
 };
 
 typedef struct c conta;
@@ -27,32 +22,32 @@ conta from, to, conta1, conta2;
 int valor;
 
 //a thread filha executara essa funcao
-void* transferencia( void *arg)
-{
- //bloqueio as contas antes de acessa-las
- pthread_mutex_lock(&from.bloqueio);
- pthread_mutex_lock(&to.bloqueio);
+void* transferencia(void *arg) {
+ struct thread_data *data = (struct thread_data*)arg;
 
- if (from.saldo >= valor){ //caso eu tiver saldo suficiente na conta 'from'...
- from.saldo -= valor; //aqui retiro o valor da conta 'from'
-  printf("Transferencia de %d reais para a conta %d\n", valor, to.saldo);
- to.saldo += valor; //e depois adiciono a conta 'to'
-   printf("Transferencia de %d reais para a conta %d\n", valor, from.saldo);
+ //bloqueio as contas antes de acessa-las
+ pthread_mutex_lock(&data->c1->bloqueio);
+ pthread_mutex_lock(&data->c2->bloqueio);
+
+ if (data->c1->saldo >= valor) { //caso eu tiver saldo suficiente na conta 'from'...
+  data->c1->saldo -= valor; //aqui retiro o valor da conta 'from'
+  printf("Transferencia de %d reais para a conta %d\n", valor, data->c2->saldo);
+  data->c2->saldo += valor; //e depois adiciono a conta 'to'
+  printf("Transferencia de %d reais para a conta %d\n", valor, data->c1->saldo);
  }
 
  //desbloqueio as contas apos acessa-las
- pthread_mutex_unlock(&to.bloqueio);
- pthread_mutex_unlock(&from.bloqueio);
+ pthread_mutex_unlock(&data->c2->bloqueio);
+ pthread_mutex_unlock(&data->c1->bloqueio);
 
  printf("Transferencia realizada com sucesso!\n");
- printf("Saldo de c1: %d\n", from.saldo);
- printf("Saldo de c2: %d\n", to.saldo);
+ printf("Saldo de c1: %d\n", data->c1->saldo);
+ printf("Saldo de c2: %d\n", data->c2->saldo);
 
- return 0;
+ return NULL;
 }
 
-int main()
-{
+int main() {
  void* stack;
  pid_t pid;
  int i;
@@ -64,33 +59,27 @@ int main()
  //as contas comecam com saldo 100
  from.saldo = 100;
  to.saldo = 100;
-conta1.saldo = 100;
-  conta2.saldo = 100;
+ conta1.saldo = 100;
+ conta2.saldo = 100;
 
- printf( "Transferindo 10 para a conta c2\n" );
- valor = 10;
+ printf("Transferindo 1 para a conta c2\n");
+ valor = 1;
 
-struct thread_data *data = (struct thread_data*)malloc(sizeof(struct thread_data)*100);
-  // criar um vetor de threads (utilizando ponteiro)
-  pthread_t *threads;
-  // alocar memoria dinamicamente para o vetor de threads
-  threads = (pthread_t*)malloc(sizeof(pthread_t)*100);
+ struct thread_data *data = (struct thread_data*)malloc(sizeof(struct thread_data)*100);
+ // criar um vetor de threads (utilizando ponteiro)
+ pthread_t *threads;
+ // alocar memoria dinamicamente para o vetor de threads
+ threads = (pthread_t*)malloc(sizeof(pthread_t)*100);
 
- for (i = 0; i < 10; i++) {
-   data[i].c1 = from;
-   data[i].c2 = to;
+ for (i = 0; i < 100; i++) {
+   data[i].c1 = &from;
+   data[i].c2 = &to;
    pthread_create(&threads[i], NULL, transferencia, &data[i]);
  }
   
-   for (i = 0; i < 10; i++) {
-     pthread_join(threads[i], NULL);
-   }
-
-  
-  printf("\nsaldo from: %d\n", from.saldo);
-  printf("saldo to: %d\n", to.saldo);
-
-  
+ for (i = 0; i < 100; i++) {
+   pthread_join(threads[i], NULL);
+ }
 
  //aqui eu destruo os mutexes
  pthread_mutex_destroy(&from.bloqueio);
@@ -98,8 +87,10 @@ struct thread_data *data = (struct thread_data*)malloc(sizeof(struct thread_data
 
  printf("Transferencias concluidas e memoria liberada.\n");
 
-
+ free(data);
+ free(threads);
 
  return 0;
 }
+
 
