@@ -7,19 +7,16 @@
 pthread_mutex_t lockc1;
 pthread_mutex_t lockc2;
 
-struct c {
+struct conta {
   char nome[100];
   int saldo; // adiciono um mutex a estrutura da conta
 };
 
 struct thread_data {
-  struct c *c1;
-  struct c *c2;
+  struct conta *c1;
+  struct conta *c2;
 };
 
-typedef struct c conta;
-
-conta from, to;
 int valor;
 
 // a thread filha executara essa funcao
@@ -33,13 +30,14 @@ void *transferencia(void *arg) {
   if (data->c1->saldo >=
       valor) { // caso eu tiver saldo suficiente na conta 'from'...
     data->c1->saldo -= valor; // aqui retiro o valor da conta 'from'
-    printf("Transferencia de %d reais para a conta %s\n", valor, data->c2->nome);
     data->c2->saldo += valor; // e depois adiciono a conta 'to'
-    printf("Transferencia de %d reais para a conta %s\n", valor, data->c1->nome);
+    printf("Transferencia de %d reais da conta %s\n", valor, data->c1->nome);
+    printf("Transferencia de %d reais para a conta %s\n", valor,
+           data->c2->nome);
   }
   printf("Transferencia realizada com sucesso!\n");
-  printf("Saldo de %s: %d\n", data->c1->nome, data->c1->saldo);
-  printf("Saldo de %s: %d\n", data->c2->nome, data->c2->saldo);
+  printf("Saldo da conta %s: %d\n", data->c1->nome, data->c1->saldo);
+  printf("Saldo da conta %s: %d\n", data->c2->nome, data->c2->saldo);
   // desbloqueio as contas apos acessa-las
   pthread_mutex_unlock(&lockc1);
   pthread_mutex_unlock(&lockc2);
@@ -56,11 +54,12 @@ int main() {
   pthread_mutex_init(&lockc1, NULL);
   pthread_mutex_init(&lockc2, NULL);
 
+  struct conta from, to;
+  strcpy(from.nome, "conta1");
+  strcpy(to.nome, "conta2");
   // as contas comecam com saldo 100
   from.saldo = 100;
-  strcpy(from.nome, "from");
   to.saldo = 100;
-  strcpy(to.nome, "to");
 
   printf("Transferindo 10 para a conta c2\n");
   valor = 1;
@@ -100,3 +99,4 @@ int main() {
 
   return 0;
 }
+
