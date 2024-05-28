@@ -8,6 +8,7 @@
 
 ### Como o programa funciona?
 Pensando no problema inical de acesso indevido aos saldos e transferências das contas por duas threads, causando inconsistência no resultado em si. Por isso, criamos dois mutex, visando imposibilitar que as transferências acessem o saldo das duas contas ao mesmo tempo, para que tenha uma garantia de que as contas possam ser acessadas somente por uma thread, dessa forma impedindo que alguma conta possa passar a ter saldo negativo.
+
 Inicializamos cada conta com valores fixos e definimos um valor de tranferência também fixo. Em um loop for, criamos cem threads, que representam as tranferências realizadas entre as contas criadas, podendo variar em sua ordem de que recebe e quem transfere (representado pelo if de divisores de 5, para ocorrer 20 tranferências com ordem trocada).
 
 ### Como executar o programa?
