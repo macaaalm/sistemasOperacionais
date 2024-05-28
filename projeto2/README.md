@@ -1,5 +1,5 @@
-# PROJETO 1
-# Problema E - Escada Rolante
+# PROJETO 2
+# Problema - Condição de Corrida
 
 ## Alunos:
 * Eduardo Honorio Friaca - RA: 10408959
