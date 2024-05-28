@@ -14,11 +14,11 @@ Inicializamos cada conta com valores fixos e definimos um valor de tranferência
 ### Como executar o programa?
 Utilizamos a plataforma AWS Academy para realizar e rodar o projeto, dessa forma:
 
-1) Depois de baixar o programa ou copiá-lo para um arquivo .c, será necessário compilar o código para que possa ser executado, utilizando o comando `gcc projeto2.c -o projeto2´:
+1) Depois de baixar o programa ou copiá-lo para um arquivo .c, será necessário compilar o código para que possa ser executado, utilizando o comando `gcc projeto2.c -o projeto2`: 
 
 ![image](https://github.com/macaaalm/sistemasOperacionais/assets/113950201/47177f2b-932b-4f85-a4d4-2bf8605fc357)
 
-2) Após compilação, utilizar o comando ´./´para rodar o programa, no nosso caso será ´./projeto2´:
+2) Após compilação, utilizar o comando `./` para rodar o programa, no nosso caso será `./projeto2`:
 
 ![image](https://github.com/macaaalm/sistemasOperacionais/assets/113950201/a19b2dc9-9dee-44fc-b180-7f404bb34d34)
 
