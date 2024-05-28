@@ -1,5 +1,5 @@
 # PROJETO 2
-# Problema - Condição de Corrida
+# Problema Conta Bancária
 
 ## Alunos:
 * Eduardo Honorio Friaca - RA: 10408959
@@ -30,4 +30,4 @@ Utilizamos a plataforma AWS Academy para realizar e rodar o projeto, dessa forma
 
 ![image](https://github.com/macaaalm/sistemasOperacionais/assets/113950201/f52dc766-6f0d-4ae8-b0df-958f721dec39)
 
-
+No nosso problema, conta 1 irá transferir 80 reais para conta 2, e conta 2 irá transferir 20 reais de conta 2 para conta 1, resultando em 160 reais finais para conta 2 e 40 para conta 1 (em transações de 1 real cada).
